@@ -15,9 +15,9 @@ class OrderPageLocators:
     NEXT_BUTTON = (By.CSS_SELECTOR, "button.Button_Button__ra12g.Button_Middle__1CSJM")
 
     # Step 2
-    DATE_INPUT = (By.CSS_SELECTOR, "input[placeholder='* Когда привезти самокат']")
-    CALENDAR = (By.XPATH, "//div[@class='react-datepicker-popper']")
-    CALENDDAR_SELECT = (By.XPATH, "//div[@class='react-datepicker-popper']//div[@class='react-datepicker__day react-datepicker__day--017']")
+    DATE_INPUT = (By.XPATH, "//div[contains(@class,'Order_Content')]//input[contains(@placeholder,'* Когда привезти самокат')]")
+    CALENDAR = (By.XPATH, ".//div[@class='react-datepicker-popper']")
+    CALENDAR_SELECT = (By.XPATH, ".//div[@class='react-datepicker-popper']/div/div//div[@class='react-datepicker__day react-datepicker__day--017']")
     RENT_PERIOD_DROPDOWN = (By.CSS_SELECTOR, "span.Dropdown-arrow")
     RENT_PERIOD_OPTION_BY_TEXT = (
         By.XPATH,
@@ -34,5 +34,3 @@ class OrderPageLocators:
         By.XPATH,
         "//div[contains(@class,'Order_Modal')]//div[contains(text(),'Хотите оформить заказ?')]",
     )
-
-#.//div[@class='select-search__select']/ul/li[@class='select-search__row'][1]/button subway selector

@@ -10,4 +10,6 @@ class FaqPage(BasePage):
     def open_question_and_get_answer(self, question_locator, answer_locator) -> str:
         self.scroll_into_view(self.find(question_locator))
         self.click(question_locator)
-        return self.find_visible(answer_locator).text
+        answer_element = self.wait_visible(answer_locator)
+        answer_text = answer_element.text
+        return answer_text

@@ -47,7 +47,7 @@ class OrderPage(BasePage):
         self.wait_visible(OrderPageLocators.DATE_INPUT)
         self.click(OrderPageLocators.DATE_INPUT)
         self.wait_visible(OrderPageLocators.CALENDAR)
-        self.click(OrderPageLocators.CALENDDAR_SELECT)
+        self.click(OrderPageLocators.CALENDAR_SELECT)
 
     def choose_rent_period(self, rent_period_text: str):
         self.wait_visible(OrderPageLocators.RENT_PERIOD_DROPDOWN).click()
@@ -78,11 +78,16 @@ class OrderPage(BasePage):
         order_btn.click()
 
     def yes_button_visible(self):
-        return WebDriverWait(self.driver).until(
+        try:
+            WebDriverWait(self.driver, self.timeout).until(
             EC.visibility_of_element_located(OrderPageLocators.CONFIRM_YES_BUTTON)
-            )
+        )
+            return True
+        except:
+            return False
 
     def wait_success_modal(self):
-        return WebDriverWait(self.driver, max(20, self.timeout * 2)).until(
+        modal_element = WebDriverWait(self.driver, max(20, self.timeout * 2)).until(
             EC.visibility_of_element_located(OrderPageLocators.SUCCESS_MODAL_TEXT)
         )
+        return modal_element.text.strip()

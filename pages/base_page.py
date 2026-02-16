@@ -24,19 +24,15 @@ class BasePage:
     def find_visible(self, locator):
         return WebDriverWait(self.driver, self.timeout).until(
             EC.visibility_of_element_located(locator)
-        )
+    )
     
-    def click(self, locator, timeout=10):
+    def click(self, locator, timeout=3):
         element = WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable(locator)
-        )
-        try:
-            element.click()
-        except Exception:
-            # Fallback to JavaScript click if normal click fails
-            self.driver.execute_script("arguments[0].click();", element)
+    )
+        element.click()
 
-    def safe_click_if_present(self, locator, timeout: int = 3) -> bool:
+    def safe_click_if_present(self, locator, timeout=3) -> bool:
         try:
             WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator)).click()
             return True
@@ -46,7 +42,7 @@ class BasePage:
             return False
 
     def get_text(self, locator):
-        return self.driver.find(locator).text
+        return self.find(locator).text
 
     def type(self, locator, text, clear=True):
         el = self.find_visible(locator)
@@ -58,4 +54,7 @@ class BasePage:
         self.driver.execute_script(
             "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", element
         )
+
+    def get_current_url(self):
+        return self.driver.current_url
 

@@ -24,3 +24,14 @@ class MainPage(BasePage):
 
     def click_yandex_logo(self):
         self.click(MainPageLocators.YANDEX_LOGO)
+
+    def wait_for_new_tab(self, original_window):
+        try:
+            self.wait.until(lambda d: len(d.window_handles) > 1)
+            for window_handle in self.driver.window_handles:
+                if window_handle != original_window:
+                    self.driver.switch_to.window(window_handle)
+                    break
+        except Exception as e:
+            print("Не удалось пройти капчу")
+            return False
