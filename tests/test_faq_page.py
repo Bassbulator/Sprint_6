@@ -4,6 +4,7 @@ import allure
 from locators.faq_page_locators import FaqPageLocators
 from pages.faq_page import FaqPage
 from pages.main_page import MainPage
+from constants import FaqAnswers
 
 class TestFaqPage:
     
@@ -18,42 +19,42 @@ class TestFaqPage:
             (
                 FaqPageLocators.HOW_MUCH,
                 FaqPageLocators.HOW_MUCH_TEXT,
-                "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
+                FaqAnswers.HOW_MUCH_ANSWER
             ),
             (
                 FaqPageLocators.WANT_FEW_SCOOTERS,
                 FaqPageLocators.WANT_FEW_SCOOTERS_TEXT,
-                "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
+                FaqAnswers.WANT_FEW_SCOOTERS_ANSWER
             ),
             (
                 FaqPageLocators.CALCULATING_RENTTIME,
                 FaqPageLocators.CALCULATING_RENTTIME_TEXT,
-                "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
+                FaqAnswers.CALCULATING_RENTTIME_ANSWER
             ),
             (
                 FaqPageLocators.ORDER_FOR_TODAY,
                 FaqPageLocators.ORDER_FOR_TODAY_TEXT,
-                "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
+                FaqAnswers.ORDER_FOR_TODAY_ANSWER
             ),
             (
                 FaqPageLocators.RETURN_SCOOTER_EARLY,
                 FaqPageLocators.RETURN_SCOOTER_EARLY_TEXT,
-                "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.",
+                FaqAnswers.RETURN_SCOOTER_EARLY_ANSWER
             ),
             (
                 FaqPageLocators.CHARGER_FOR_SCOOTER,
                 FaqPageLocators.CHARGER_FOR_SCOOTER_TEXT,
-                "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
+                FaqAnswers.CHARGER_FOR_SCOOTER_ANSWER
             ),
             (
                 FaqPageLocators.CANCEL_ORDER,
                 FaqPageLocators.CANCEL_ORDER_TEXT,
-                "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
+                FaqAnswers.CANCEL_ORDER_ANSWER
             ),
             (
                 FaqPageLocators.OUTSIDE_MKAD_DELIVERY,
                 FaqPageLocators.OUTSIDE_MKAD_DELIVERY_TEXT,
-                "Да, обязательно. Всем самокатов! И Москве, и Московской области.",
+                FaqAnswers.OUTSIDE_MKAD_DELIVERY_ANSWER
             ),
         ],
         ids=[

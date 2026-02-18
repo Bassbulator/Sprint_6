@@ -3,6 +3,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from constants import BasePageLocators
 
 
 
@@ -15,8 +16,8 @@ class BasePage:
     def wait_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
 
-    def open(self, base_url):
-        self.driver.get(base_url)
+    def open(self):
+        self.driver.get(BasePageLocators.BASE_URL)
     
     def find(self, locator):
         return self.driver.find_element(*locator)
@@ -57,4 +58,16 @@ class BasePage:
 
     def get_current_url(self):
         return self.driver.current_url
-
+    
+    def get_new_tab(self, driver):
+        return driver.current_window_handle
+    
+    def switch_to_new_tab(self, original_window):
+        try:
+            self.wait.until(lambda d: len(d.window_handles) > 1)
+            for window_handle in self.driver.window_handles:
+                if window_handle != original_window:
+                    self.driver.switch_to.window(window_handle)
+                    break
+        except Exception as e:
+            return False

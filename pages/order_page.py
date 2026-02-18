@@ -38,11 +38,6 @@ class OrderPage(BasePage):
         self.type_phone_number(phone)
         self.click_next_button()
 
-#    def type_date(self, date_str: str):
-#        el = self.find(OrderPageLocators.DATE_INPUT)
-#        el.send_keys(date_str)
-#        el.send_keys(Keys.ENTER)
-
     def type_date(self):
         self.wait_visible(OrderPageLocators.DATE_INPUT)
         self.click(OrderPageLocators.DATE_INPUT)
@@ -51,26 +46,31 @@ class OrderPage(BasePage):
 
     def choose_rent_period(self, rent_period_text: str):
         self.wait_visible(OrderPageLocators.RENT_PERIOD_DROPDOWN).click()
-        # build locator for the option with provided text
         locator = (
             OrderPageLocators.RENT_PERIOD_OPTION_BY_TEXT[0],
             OrderPageLocators.RENT_PERIOD_OPTION_BY_TEXT[1].format(text=rent_period_text),
         )
         self.wait_visible(locator).click()
 
-    def choose_color(self, color: str):
-        if color.lower() == "black":
-            self.find(OrderPageLocators.COLOR_BLACK).click()
-        else:
-            self.find(OrderPageLocators.COLOR_GREY).click()
+    def choose_black_color(self):
+        self.find(OrderPageLocators.COLOR_BLACK).click()
+
+    def choose_grey_color(self):
+        self.find(OrderPageLocators.COLOR_GREY).click()
 
     def type_comment(self, comment: str):
         self.find(OrderPageLocators.COMMENT_FIELD).send_keys(comment)
 
-    def fill_step_two(self, rent_period_text, color, comment):
+    def fill_step_two_black(self, rent_period_text, comment):
         self.type_date()
         self.choose_rent_period(rent_period_text)
-        self.choose_color(color)
+        self.choose_black_color()
+        self.type_comment(comment)
+
+    def fill_step_two_grey(self, rent_period_text, comment):
+        self.type_date()
+        self.choose_rent_period(rent_period_text)
+        self.choose_grey_color()
         self.type_comment(comment)
 
     def submit_order(self):
@@ -79,9 +79,7 @@ class OrderPage(BasePage):
 
     def yes_button_visible(self):
         try:
-            WebDriverWait(self.driver, self.timeout).until(
-            EC.visibility_of_element_located(OrderPageLocators.CONFIRM_YES_BUTTON)
-        )
+            self.find_visible(OrderPageLocators.YES_BUTTON)
             return True
         except:
             return False
